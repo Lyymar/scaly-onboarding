@@ -1,23 +1,80 @@
-# Getting Started with Create React App
+# Scaly Onboarding Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A comprehensive, user-friendly web application that replaces the current Excel-based customer onboarding process. This application guides new customers through a series of configuration steps to set up their helpdesk and chat support environment.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+- **Multi-step wizard interface** with intuitive sidebar navigation
+- **Auto-save functionality** - progress is saved automatically
+- **Progress tracking** with visual indicators
+- **Responsive design** that works on all devices
+- **Dynamic forms and tables** for data management
+- **Shareable project links** for collaboration
+- **Modern UI** built with React + TypeScript + Tailwind CSS
+
+## 📋 Implemented Sections
+
+✅ **Overview (Översiktsblad)** - Introduction and instructions
+✅ **Migration (Migrering)** - Data migration specifications
+✅ **Email Addresses (E-postadress)** - Support email configuration
+✅ **Working Hours (Arbetstid)** - Business hours setup
+✅ **Agents & Groups (Agenter & Grupper)** - Team management
+
+🚧 **Coming Soon:**
+- SLA (Service Level Agreements)
+- Custom Fields (Contact & Ticket)
+- Form Builder
+- Canned Responses
+- Solution Articles
+- Automations
+- Portal Settings
+- Integrations
+- Reports
+
+## 🛠️ Technology Stack
+
+- **Frontend:** React 18 + TypeScript
+- **Styling:** Tailwind CSS
+- **State Management:** React Hooks
+- **Data Persistence:** LocalStorage (will be upgraded to backend)
+- **Build Tool:** Create React App
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 16+ installed
+- npm or yarn package manager
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd scaly-onboarding
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start the development server:
+```bash
+npm start
+```
+
+4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## 📖 Available Scripts
 
 ### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Runs the app in development mode. The page will reload if you make edits.
 
 ### `npm test`
+Launches the test runner in interactive watch mode.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `npm run build`
+Builds the app for production to the `build` folder.
 
 ### `npm run build`
 
