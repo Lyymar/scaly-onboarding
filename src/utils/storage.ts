@@ -2,7 +2,7 @@ import { OnboardingProject } from '../types';
 
 // API Configuration
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://your-backend-url.onrender.com/api' // Will be updated when deployed
+  ? (process.env.REACT_APP_API_URL || 'https://scaly-onboarding-backend.onrender.com/api')
   : 'http://localhost:5001/api';
 
 // API Helper function

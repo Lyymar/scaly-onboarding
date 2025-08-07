@@ -1,0 +1,32 @@
+services:
+  # Backend API Service
+  - type: web
+    name: scaly-onboarding-backend
+    env: node
+    plan: free
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+    healthCheckPath: /api/health
+
+  # Frontend React App Service  
+  - type: web
+    name: scaly-onboarding-frontend
+    env: static
+    plan: free
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./build
+    envVars:
+      - key: REACT_APP_API_URL
+        fromService:
+          type: web
+          name: scaly-onboarding-backend
+          property: host
+
+databases:
+  # SQLite database will be handled by the backend service
+  # For production, we could upgrade to PostgreSQL if needed
