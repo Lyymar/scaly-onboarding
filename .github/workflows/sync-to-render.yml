@@ -1,0 +1,31 @@
+# .github/workflows/sync-to-render.yml
+# This workflow syncs changes from this repository to the OmidScaly/scaly-onboarding repository.
+
+name: Sync to Render Repo
+
+# This action triggers on every push to the 'main' branch of this repository.
+# If your primary branch is named something else (e.g., master), change 'main' below.
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Checks out the code from the current (Windsurf) repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Fetches all history for all branches and tags
+
+      # 2. Pushes the code to the Render-connected repository (scaly-onboarding)
+      - name: Push to Render repository
+        env:
+          # This uses the 'GH_PAT_RENDER' secret you created earlier.
+          GH_PAT: ${{ secrets.GH_PAT_RENDER }}
+        run: |
+          # This command pushes the code to your 'scaly-onboarding' repo.
+          # It uses the Personal Access Token for authentication.
+          git push https://x-access-token:${GH_PAT}@github.com/OmidScaly/scaly-onboarding.git HEAD:main --force
