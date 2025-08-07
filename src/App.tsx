@@ -9,36 +9,44 @@ function App() {
   const [currentSection, setCurrentSection] = useState('overview');
   const [project, setProject] = useState<OnboardingProject | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Initialize or load existing project
-    const initProject = async () => {
+    const loadOrCreateProject = async () => {
       try {
-        // Get project ID from URL or create new one
         const urlParams = new URLSearchParams(window.location.search);
-        const projectId = urlParams.get('id') || generateProjectId();
+        const projectId = urlParams.get('id');
         
-        let loadedProject = await loadProject(projectId);
-        if (!loadedProject) {
-          loadedProject = initializeProject(projectId);
-          await saveProject(loadedProject);
+        if (projectId) {
+          // Try to load existing project
+          const existingProject = await loadProject(projectId);
+          if (existingProject) {
+            setProject(existingProject);
+            setLoading(false);
+            return;
+          }
         }
         
-        setProject(loadedProject);
+        // Create new project if no ID provided or project not found
+        const newProject = await initializeProject(projectId || undefined);
+        setProject(newProject);
+        
+        // Update URL with new project ID if none was provided
+        if (!projectId) {
+          const newUrl = new URL(window.location.href);
+          newUrl.searchParams.set('id', newProject.id);
+          window.history.replaceState({}, '', newUrl.toString());
+        }
+        
         setLoading(false);
-        
-        // Update URL with project ID if not present
-        if (!urlParams.get('id')) {
-          const newUrl = `${window.location.pathname}?id=${projectId}`;
-          window.history.replaceState({}, '', newUrl);
-        }
       } catch (error) {
-        console.error('Failed to initialize project:', error);
+        console.error('Failed to load or create project:', error);
+        setError('Failed to load project. Please try again.');
         setLoading(false);
       }
     };
-
-    initProject();
+    
+    loadOrCreateProject();
   }, []);
 
   const generateProjectId = (): string => {

@@ -1,14 +1,18 @@
+// Import statements first
+import React from 'react';
+import PlaceholderSection from './PlaceholderSection';
+import { OnboardingProject } from '../../types';
+
 // Export all section components
 export { default as Overview } from './Overview';
 export { default as Migration } from './Migration';
 export { default as EmailAddresses } from './EmailAddresses';
 export { default as WorkingHours } from './WorkingHours';
 export { default as AgentsGroups } from './AgentsGroups';
+export { default as SLA } from './SLA';
+export { default as ContactFields } from './ContactFields';
 
 // Placeholder sections - these will be implemented later
-import React from 'react';
-import PlaceholderSection from './PlaceholderSection';
-import { OnboardingProject } from '../../types';
 
 interface SectionProps {
   project: OnboardingProject;
@@ -16,23 +20,7 @@ interface SectionProps {
   onMarkCompleted: (sectionId: string) => Promise<void>;
 }
 
-export const SLA: React.FC<SectionProps> = (props) => (
-  React.createElement(PlaceholderSection, {
-    ...props,
-    sectionId: "sla",
-    sectionTitle: "SLA (Service Level Agreements)",
-    sectionDescription: "Konfigurera servicenivåavtal och svarstider"
-  })
-);
-
-export const ContactFields: React.FC<SectionProps> = (props) => (
-  React.createElement(PlaceholderSection, {
-    ...props,
-    sectionId: "contact-fields",
-    sectionTitle: "Kontaktfält",
-    sectionDescription: "Skapa anpassade fält för kontakter"
-  })
-);
+// SLA and ContactFields are now exported as real components above
 
 export const TicketFields: React.FC<SectionProps> = (props) => (
   React.createElement(PlaceholderSection, {
