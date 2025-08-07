@@ -3,8 +3,6 @@
 
 name: Sync to Render Repo
 
-# This action triggers on every push to the 'main' branch of this repository.
-# If your primary branch is named something else (e.g., master), change 'main' below.
 on:
   push:
     branches:
@@ -14,18 +12,15 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      # 1. Checks out the code from the current (Windsurf) repository
+      # 1. Checks out the code from the current repository
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # Fetches all history for all branches and tags
+          fetch-depth: 0
 
-      # 2. Pushes the code to the Render-connected repository (scaly-onboarding)
+      # 2. Pushes the code to the destination repository
       - name: Push to Render repository
         env:
-          # This uses the 'GH_PAT_RENDER' secret you created earlier.
           GH_PAT: ${{ secrets.GH_PAT_RENDER }}
         run: |
-          # This command pushes the code to your 'scaly-onboarding' repo.
-          # It uses the Personal Access Token for authentication.
           git push https://x-access-token:${GH_PAT}@github.com/OmidScaly/scaly-onboarding.git HEAD:main --force
